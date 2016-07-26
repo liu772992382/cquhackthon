@@ -8,8 +8,8 @@ import json
 app = Flask(__name__)
 
 def decrypt(data):
-	iv = '9b738aa2ee18145a' # app id
-	KEY = '298fe57f669647ffe92ee1deba8b944e' # app secret
+	iv = '6baadc29cf37062a' # app id
+	KEY = '9acfba94ad8877ed858e9acf01fe3acb' # app secret
 	mode = AES.MODE_CBC
 	data = util.h2b(data)
 	decryptor = AES.new(KEY, mode, IV=iv)
