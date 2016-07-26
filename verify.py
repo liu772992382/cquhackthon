@@ -29,9 +29,11 @@ def hashpw(a):
 
 @app.route('/yiban',methods = ['GET'])
 def yiban():
-	x=request.args['test']
-	print x
-	return '31531'
+	x=request.args['verify_request']
+	info = decrypt(x)
+	print info
+	info_json = json.dumps(info)
+	return info_json
 	# info=decrypt(x[1])
 	# print info
 	# return info
