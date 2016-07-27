@@ -64,8 +64,27 @@ def yiban():
 @app.route('/bind',methods = ['GET'])
 def user_bind():
 	get_args = request.args
-	# user =
-	return 'GET'
+	if get_args['token'] == hashpw(get_args['id']+'hackthon'):
+		user = db.session.query(User).filter_by(yb_id = get_args['id']).first()
+		user.stu_num = get_args['jwc_name']
+		user.pass_word = get_args['jwc_pass']
+		db.session.commit(user)
+		return 'success'
+	else:
+		return 'error'
+
+@app.route('/getdata',methods = ['GET','POST'])
+def getdata():
+	get_args = request.args
+	if get_args['token'] == hashpw(get_args['id']+'hackthon'):
+		user = db.session.query(User).filter_by(yb_id = get_args['id']).first()
+
+
+@app.route('/',methods = ['GET'])
+def index():
+	schools = db.session.query(School).all()
+	return render_template('Index.html',schools = schools)
+
 
 
 @app.route('/',methods = ['GET'])
@@ -73,6 +92,8 @@ def index():
 	if request.method == 'GET':
 		return render_template('Submit.html')
 	elif request.method == 'POST':
+		dataform = request.form
+		db.session.query(School).filter_by(school_name = dataform['school_name']).first()
 		return 'success'
 
 if __name__=='__main__':

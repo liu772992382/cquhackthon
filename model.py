@@ -16,9 +16,9 @@ class School(db.Model):
     __tablename__ = 'schools'
 
     id = db.Column(db.Integer,primary_key = True)
-    school_id = db.Column(db.String(256))
+    school_id = db.Column(db.String(256),unique = True)
     school_name = db.Column(db.String(256))
-    api_url = db.Column(db.String(512))
+    api_url = db.Column(db.String(512),unique = True)
     provide_user_name = db.Column(db.String(64))
     privide_user_id = db.Column(db.String(64))
     class_time = db.Column(db.String(512))
@@ -27,7 +27,7 @@ class User(db.Model):
     __tablename__ = 'Users'
 
     uid = db.Column(db.Integer, primary_key = True)
-    yb_id = db.Column(db.String(64))
+    yb_id = db.Column(db.String(64),unique = True)
     stu_num = db.Column(db.String(64))
     pass_word = db.Column(db.String(128))
     school_id = db.Column(db.String(256))

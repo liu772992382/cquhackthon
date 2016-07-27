@@ -65,18 +65,13 @@ var pickerDescribe = myApp.picker({
 });
 
 function news1(){
-  $.post('/shanyi/news',{
-    'title':$('#title').val(),
-    'subtitle':$('#subtitle').val(),
-    'image':$('#image').val(),
-    'source':$('#source').val(),
-    'content':$('#picker-describe').val(),
-    'city':0,
-    'type':1
+  $.post('/',{
+    'school_name':$('#school_name').val(),
+    'api_url':$('#api_url').val(),
+    'provide_user_name':$('#provide_user_name').val()
   },function(data,status){
     if(data == 'success'){
       myApp.alert('提交成功！',function(){
-        window.location.href = "/shanyi/manage";
       });
       }
     else if(data =='error'){
