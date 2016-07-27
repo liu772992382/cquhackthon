@@ -18,7 +18,7 @@ class School(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     school_id = db.Column(db.String(256),unique = True)
     school_name = db.Column(db.String(256))
-    api_url = db.Column(db.String(512),unique = True)
+    api_url = db.Column(db.String(256),unique = True)
     provide_user_name = db.Column(db.String(64))
     privide_user_id = db.Column(db.String(64))
     class_time = db.Column(db.String(512))
