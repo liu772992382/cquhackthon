@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 #coding=utf8
 
-import flask.ext.whooshalchemy as whooshalchemy
 from flask.ext.sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask import Flask
