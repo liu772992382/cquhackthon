@@ -57,7 +57,7 @@ def yiban():
 	else:
 		userdata['school_api'] = False
 	user_json = json.dumps(userdata)
-	return "<html><head></head><body><script>window.local_obj.showSource('"+user_json+"‘);</script></body></html>"
+	return "<html><head></head><body><script>window.local_obj.showSource('"+user_json+"'	);</script></body></html>"
 
 
 @app.route('/bind',methods = ['GET'])
