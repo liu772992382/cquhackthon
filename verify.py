@@ -68,11 +68,11 @@ def yiban():
 @app.route('/bind',methods = ['GET'])
 def user_bind():
 	get_args = request.args
-	if get_args['token'] == hashpw(get_args['id']+'hackthon') or 1:
+	if get_args['token'] == hashpw(get_args['id']+'hackthon'):
 		user = db.session.query(User).filter_by(yb_id = get_args['id']).first()
 		user.stu_num = get_args['jwc_name']
 		user.pass_word = get_args['jwc_pass']
-		db.session.commit(user)
+		db.session.commit()
 		return 'success'
 	else:
 		return 'error'
