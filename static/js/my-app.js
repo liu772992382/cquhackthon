@@ -72,6 +72,7 @@ function news1(){
   },function(data,status){
     if(data == 'success'){
       myApp.alert('提交成功！',function(){
+        window.location.href = "/";
       });
       }
     else if(data =='error'){

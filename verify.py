@@ -109,7 +109,15 @@ def submit():
 	elif request.method == 'POST':
 		dataform = request.form
 		school = db.session.query(School).filter_by(school_name = dataform['school_name']).first()
-		if school == None or school.api_url == None:
+		if school == None:
+			school = School()
+			school.api_url = dataform['api_url']
+			school.school_name = dataform['school_name']
+			school.provide_user_name = dataform['provide_user_name']
+			db.session.add(school)
+			db.session.commit()
+			return 'success'
+		elif school.api_url == None:
 			school.api_url = dataform['api_url']
 			school.school_name = dataform['school_name']
 			school.provide_user_name = dataform['provide_user_name']
@@ -117,5 +125,14 @@ def submit():
 			return 'success'
 		else:
 			return 'error'
+
+
+@app.route('/upload',methods = ['POST'])
+def upload():
+	upfile = request.files['file']
+	print upfile.filename
+	return upfile.filename
+
+
 if __name__=='__main__':
 	app.run(host='0.0.0.0',port=2222, debug=True)

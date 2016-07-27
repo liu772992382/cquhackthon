@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% block nav%}
 <div class="navbar-inner">
-  <div class="center" style="left: 0px;">提交课表接口</div>
+  <div class="center" style="left: 0px;">已接入大学</div>
+  <div class="right">
+    <a href="/submit" class="link">接入</a>
+</div>
   <!-- <div class="right"></div> -->
 </div>
 {% endblock %}
 {% block content %}
-<div class="content-block-title">Mail App</div>
+<div class="content-block-title">提供人信息</div>
 <div class="list-block media-list">
   <ul>
     {% for i in schools %}
@@ -17,8 +20,8 @@
             <div class="item-title">{{i.school_name}}</div>
             <div class="item-after">{{i.school_id}}</div>
           </div>
-          <div class="item-subtitle">{{i.provide_user_name}}</div>
-          <div class="item-text">{{i.api_url}}</div>
+          <div class="item-subtitle">提供者:{{i.provide_user_name}}</div>
+          <div class="item-text">接口地址:{{i.api_url}}</div>
         </div>
       </a>
     </li>
