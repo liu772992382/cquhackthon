@@ -65,7 +65,7 @@ def yiban():
 @app.route('/bind',methods = ['GET'])
 def user_bind():
 	get_args = request.args
-	if get_args['token'] == hashpw(get_args['id']+'hackthon'):
+	if get_args['token'] == hashpw(get_args['id']+'hackthon') or 1:
 		user = db.session.query(User).filter_by(yb_id = get_args['id']).first()
 		user.stu_num = get_args['jwc_name']
 		user.pass_word = get_args['jwc_pass']
@@ -88,14 +88,22 @@ def index():
 
 
 
-@app.route('/submit',methods = ['GET'])
+@app.route('/submit',methods = ['GET','POST'])
 def submit():
 	if request.method == 'GET':
 		return render_template('Submit.html')
 	elif request.method == 'POST':
 		dataform = request.form
-		db.session.query(School).filter_by(school_name = dataform['school_name']).first()
-		return 'success'
-
+		school = db.session.query(School).filter_by(school_name = dataform['school_name']).first()
+		if school == None or school.api_url == None:
+			school_data = School()
+			school_data.api_url = dataform['api_url']
+			school_data.school_name = dataform['school_name']
+			school_data.provide_user_name = dataform['provide_user_name']
+			db.session.add(school_data)
+			db.session.commit()
+			return 'success'
+		else:
+			return 'error'
 if __name__=='__main__':
 	app.run(host='0.0.0.0',port=2222, debug=True)

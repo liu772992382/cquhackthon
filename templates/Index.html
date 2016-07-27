@@ -6,5 +6,23 @@
 </div>
 {% endblock %}
 {% block content %}
-
+<div class="content-block-title">Mail App</div>
+<div class="list-block media-list">
+  <ul>
+    {% for i in schools %}
+    <li>
+      <a href="#" class="item-link item-content">
+        <div class="item-inner">
+          <div class="item-title-row">
+            <div class="item-title">{{i.school_name}}</div>
+            <div class="item-after">{{i.school_id}}</div>
+          </div>
+          <div class="item-subtitle">{{i.provide_user_name}}</div>
+          <div class="item-text">{{i.api_url}}</div>
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}

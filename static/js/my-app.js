@@ -65,7 +65,7 @@ var pickerDescribe = myApp.picker({
 });
 
 function news1(){
-  $.post('/',{
+  $.post('/submit',{
     'school_name':$('#school_name').val(),
     'api_url':$('#api_url').val(),
     'provide_user_name':$('#provide_user_name').val()
