@@ -15,7 +15,7 @@ db = SQLAlchemy(app)
 class School(db.Model):
     __tablename__ = 'schools'
 
-    school_id = db.Column(db.Integer,primary_key = True)
+    school_id = db.Column(db.String(256))
     school_name = db.Column(db.String(256))
     api_url = db.Column(db.String(512))
     provide_user_name = db.Column(db.String(64))
