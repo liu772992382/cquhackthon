@@ -46,9 +46,12 @@ def yiban():
 	user = User()
 	user.yb_id = userdata['id']
 	user.school_id = a.json()['info']['yb_schoolid']
-	if db.session.query(User).filter_by(yb_id = userdata['id']).first().stu_num != None:
-		userdata['is_bind'] = True
-	else:
+	try:
+		if db.session.query(User).filter_by(yb_id = userdata['id']).first().stu_num != None:
+			userdata['is_bind'] = True
+		else:
+			userdata['is_bind'] = False
+	except:
 		userdata['is_bind'] = False
 	if db.session.query(User).filter_by(yb_id = userdata['id']).first() == None:
 		db.session.add(user)
