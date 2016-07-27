@@ -43,7 +43,7 @@ def yiban():
 	a = requests.get('https://openapi.yiban.cn/user/other?access_token='+userdata['access_token']+'&yb_userid='+userdata['id'])
 	userdata['school'] = a.json()['info']['yb_schoolname']
 	userdata['token'] = hashpw(userdata['id']+'hackthon')
-	if db.session.qeury(User).filter_by(yb_id = userdata['id']).first() != None:
+	if db.session.query(User).filter_by(yb_id = userdata['id']).first() != None:
 		userdata['is_bind'] = True
 	else:
 		userdata['is_bind'] = False
