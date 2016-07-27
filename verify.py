@@ -87,8 +87,8 @@ def index():
 
 
 
-@app.route('/',methods = ['GET'])
-def index():
+@app.route('/submit',methods = ['GET'])
+def submit():
 	if request.method == 'GET':
 		return render_template('Submit.html')
 	elif request.method == 'POST':
