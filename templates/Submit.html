@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block nav%}
+<div class="navbar-inner">
+  <div class="center" style="left: 0px;">提交课表接口</div>
+  <!-- <div class="right"></div> -->
+</div>
+{% endblock %}
+{% block content %}
+<div class="content-block-title">Just inputs</div>
+<form class="list-block">
+  <ul>
+    <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <input type="text" placeholder="学校" name="school_name" id="school_name" >
+          </div>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="item-content">
+        <div class="item-inner">
+          <div class="item-input">
+            <input type="text" placeholder="接口地址" name="api_url" id="api_url" >
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="content-block-title">2 values and 3d-rotate effect</div>
+  <div class="list-block">
+    <ul>
+      <li>
+        <div class="item-content">
+          <div class="item-inner">
+            <div class="item-input">
+              <input type="text" placeholder="课程时长" name="class_time" id="class_time" >
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+      <li>
+        <div class="item-content">
+          <div class="item-inner">
+            <div class="item-input">
+              <input type="text" placeholder="课程开始时间" readonly id="picker-describe">
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <p class="login">
+    <div class="button button-big button-fill" onclick="news1()" >提交</div>
+  </p>
+</form>
+{% endblock %}

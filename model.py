@@ -13,6 +13,16 @@ app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 
+class School(db.Model):
+    __tablename__ = 'schools'
+
+    school_id = db.Column(db.Integer,primary_key = True)
+    school_name = db.Column(db.String(256))
+    api_url = db.Column(db.String(512))
+    provide_user_name = db.Column(db.String(64))
+    privide_user_id = db.Column(db.String(64))
+    class_time = db.Column(db.String(512))
+
 class User(db.Model):
     __tablename__ = 'Users'
 
@@ -20,12 +30,5 @@ class User(db.Model):
     yb_id = db.Column(db.String(64))
     stu_num = db.Column(db.String(64))
     pass_word = db.Column(db.String(128))
-    school_id = db.Column(db.Integer,ForeignKey())
-
-
-class School(db.Model):
-    __tablename__ = 'schools'
-
-    school_id = db.Column(Integer,primary_key = True)
-    school_name = db.Column(db.String(256))
-    api_url = db.Column(db.String(512))
+    school_id = db.Column(db.Integer,db.ForeignKey(School.school_id))
+    date_time = db.Column(db.date)

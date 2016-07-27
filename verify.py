@@ -23,8 +23,11 @@ def decrypt(data):
 def hashpw(a):
 	ha=hashlib.md5()
 	ha.update(a)
-	print str(ha.hexdigest()),a
+	# print str(ha.hexdigest()),a
 	return str(ha.hexdigest())
+
+# def buildjson(data):
+
 
 
 @app.route('/yiban',methods = ['GET'])
@@ -34,13 +37,14 @@ def yiban():
 	print info
 	info_json = json.dumps(info)
 	return info_json
-	# info=decrypt(x[1])
-	# print info
-	# return info
+
 
 @app.route('/',methods = ['GET'])
 def index():
-	return 'success'
+	if request.method == 'GET':
+		return render_template('Submit.html')
+	elif request.method == 'POST':
+		return 'success'
 
 if __name__=='__main__':
 	app.run(host='0.0.0.0',port=2222, debug=True)
