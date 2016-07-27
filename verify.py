@@ -5,6 +5,7 @@ from M2Crypto import util
 from Crypto.Cipher import AES
 from flask import Flask, request, render_template,redirect,make_response,flash,session,g,url_for,jsonify
 import json
+from model import *
 app = Flask(__name__)
 
 def decrypt(data):
@@ -28,15 +29,33 @@ def hashpw(a):
 
 # def buildjson(data):
 
+def aeshash(data):
+	obj = AES.new('cquhackthoniv',AES.MODE_CBC,'cquhackthonkey')
+	ci = obj.encrypt(data)
+	return ci
 
 
 @app.route('/yiban',methods = ['GET'])
 def yiban():
 	x=request.args['verify_request']
 	info = decrypt(x)
-	print info
-	info_json = json.dumps(info)
-	return info_json
+	userdata = {}
+	userdata['access_token'] = info['visit_oauth']['access_token']
+	userdata['id'] = info['visit_user']['userid']
+	userdata['username'] = info['visit_user']['username']
+	a = requests.get('https://openapi.yiban.cn/user/other?access_token='+userdata['access_token']+'&yb_userid='+userdata['id'])
+	userdata['school'] = a.json()['info']['yb_schoolname']
+	userdata['token'] = aeshash(userdata['id'])
+	if db.session.qeury(User).filter_by(yb_id = userdata['id']).first() != None:
+		userdata['is_bind'] = True
+	else:
+		userdata['is_bind'] = False
+	if db.session.query(School).filter_by(school_name = userdata['school']).first() != None:
+		userdata['school_api'] = True
+	else:
+		userdata['school_api'] = False
+	user_json = json.dumps(userdata)
+	return user_json
 
 
 @app.route('/',methods = ['GET'])
