@@ -40,7 +40,7 @@ def yiban():
 	userdata['access_token'] = info['visit_oauth']['access_token']
 	userdata['id'] = info['visit_user']['userid']
 	userdata['username'] = info['visit_user']['username']
-	a = requests.get('https://openapi.yiban.cn/user/other?access_token='+userdata['access_token']+'&yb_userid='+userdata['id'])
+	a = requests.get('https://openapi.yiban.cn/user/other?access_token='+userdata['access_token']+'&yb_userid='+userdata['id'],verify=False)
 	userdata['school'] = a.json()['info']['yb_schoolname']
 	userdata['token'] = hashpw(userdata['id']+'hackthon')
 	print userdata['id']
