@@ -6,6 +6,7 @@ from Crypto.Cipher import AES
 from flask import Flask, request, render_template,redirect,make_response,flash,session,g,url_for,jsonify
 import json
 from model import *
+import requests
 app = Flask(__name__)
 
 def decrypt(data):
