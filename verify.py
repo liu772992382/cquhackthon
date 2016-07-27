@@ -52,12 +52,13 @@ def yiban():
 		userdata['is_bind'] = True
 	else:
 		userdata['is_bind'] = False
-	if db.session.query(School).filter_by(school_id = a.json()['info']['yb_schoolid']).first().api_url != None:
-		userdata['school_api'] = True
+	if db.session.query(School).filter_by(school_id = a.json()['info']['yb_schoolid']).first() != None:
+		if db.session.query(School).filter_by(school_id = a.json()['info']['yb_schoolid']).first().api_url !=None:
+			userdata['school_api'] = True
 	else:
 		userdata['school_api'] = False
 	user_json = json.dumps(userdata)
-	return "<html><head></head><body><script>window.local_obj.showSource('"+user_json+"'	);</script></body></html>"
+	return "<html><head></head><body><script>window.local_obj.showSource('"+user_json+"');</script></body></html>"
 
 
 @app.route('/bind',methods = ['GET'])
