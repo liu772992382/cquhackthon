@@ -114,7 +114,6 @@ def submit():
 			school_data.api_url = dataform['api_url']
 			school_data.school_name = dataform['school_name']
 			school_data.provide_user_name = dataform['provide_user_name']
-			db.session.add(school_data)
 			db.session.commit()
 			return 'success'
 		else:
