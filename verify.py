@@ -31,7 +31,7 @@ def hashpw(a):
 # def buildjson(data):
 
 def aeshash(data):
-	obj = AES.new('cquhackthoniv',AES.MODE_CBC,'cquhackthonkey')
+	obj = AES.new('cquhackthoniv123',AES.MODE_CBC,'cquhackthonkey456')
 	ci = obj.encrypt(data)
 	return ci
 
