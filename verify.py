@@ -43,9 +43,7 @@ def yiban():
 	a = requests.get('https://openapi.yiban.cn/user/other?access_token='+userdata['access_token']+'&yb_userid='+userdata['id'],verify=False)
 	userdata['school'] = a.json()['info']['yb_schoolname']
 	userdata['token'] = hashpw(userdata['id']+'hackthon')
-	print userdata['id']
 	if db.session.query(User).filter_by(yb_id = userdata['id']).first() != None:
-		print 1
 		userdata['is_bind'] = True
 	else:
 		userdata['is_bind'] = False
@@ -55,6 +53,15 @@ def yiban():
 		userdata['school_api'] = False
 	user_json = json.dumps(userdata)
 	return user_json
+
+
+@app.route('/bind',methods = ['GET','POST'])
+def user_bind():
+	if request.method == 'POST':
+		print request.form
+		return success
+	elif request.method == 'GET':
+		return 'GET'
 
 
 @app.route('/',methods = ['GET'])
