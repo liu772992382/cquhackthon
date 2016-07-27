@@ -31,4 +31,5 @@ class User(db.Model):
     stu_num = db.Column(db.String(64))
     pass_word = db.Column(db.String(128))
     school_id = db.Column(db.String(256))
+    school_name = db.Column(db.String(256))
     date_time = db.Column(db.DateTime)

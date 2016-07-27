@@ -44,6 +44,12 @@ def yiban():
 	userdata['school'] = a.json()['info']['yb_schoolname']
 	userdata['token'] = hashpw(userdata['id']+'hackthon')
 	user = User()
+	school = School()
+	if db.session.query(School).filter_by(school_id = a.json()['info']['yb_schoolid']).first() == None:
+		school.school_id = a.json()['info']['yb_schoolid']
+		school.school_name = a.json()['info']['yb_schoolname']
+		db.session.add(school)
+		db.session.commit()
 	user.yb_id = userdata['id']
 	user.school_id = a.json()['info']['yb_schoolid']
 	try:
