@@ -43,25 +43,32 @@ def yiban():
 	a = requests.get('https://openapi.yiban.cn/user/other?access_token='+userdata['access_token']+'&yb_userid='+userdata['id'],verify=False)
 	userdata['school'] = a.json()['info']['yb_schoolname']
 	userdata['token'] = hashpw(userdata['id']+'hackthon')
-	if db.session.query(User).filter_by(yb_id = userdata['id']).first() != None:
+	user = User()
+	user.yb_id = userdata['id']
+	user.school_id = a.json()['info']['yb_schoolid']
+	db.session.add(user)
+	db.session.commit()
+	if db.session.query(User).filter_by(yb_id = userdata['id']).first().stu_num != None:
 		userdata['is_bind'] = True
 	else:
 		userdata['is_bind'] = False
-	if db.session.query(School).filter_by(school_id = a.json()['info']['yb_schoolid']).first() != None:
+	if db.session.query(School).filter_by(school_id = a.json()['info']['yb_schoolid']).first().api_url != None:
 		userdata['school_api'] = True
 	else:
 		userdata['school_api'] = False
 	user_json = json.dumps(userdata)
-	return user_json
+	return '''<html><head></head><body>
+			    <script>
+			        window.local_obj.showSource('''+user_json+''');
+			    </script>
+			</body></html>'''
 
 
-@app.route('/bind',methods = ['GET','POST'])
+@app.route('/bind',methods = ['GET'])
 def user_bind():
-	if request.method == 'POST':
-		print request.form
-		return success
-	elif request.method == 'GET':
-		return 'GET'
+	get_args = request.args
+	# user =
+	return 'GET'
 
 
 @app.route('/',methods = ['GET'])
