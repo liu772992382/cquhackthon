@@ -25,15 +25,11 @@ def decrypt(data):
 def hashpw(a):
 	ha=hashlib.md5()
 	ha.update(a)
-	# print str(ha.hexdigest()),a
+	print str(ha.hexdigest()),a
 	return str(ha.hexdigest())
 
 # def buildjson(data):
 
-def aeshash(data):
-	obj = AES.new('This is a key123',AES.MODE_CBC,'This is an IV456')
-	ci = obj.encrypt(data)
-	return ci
 
 
 @app.route('/yiban',methods = ['GET'])
@@ -46,7 +42,7 @@ def yiban():
 	userdata['username'] = info['visit_user']['username']
 	a = requests.get('https://openapi.yiban.cn/user/other?access_token='+userdata['access_token']+'&yb_userid='+userdata['id'])
 	userdata['school'] = a.json()['info']['yb_schoolname']
-	userdata['token'] = aeshash(userdata['id'])
+	userdata['token'] = hashpw(userdata['id']+'hackthon')
 	if db.session.qeury(User).filter_by(yb_id = userdata['id']).first() != None:
 		userdata['is_bind'] = True
 	else:
