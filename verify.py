@@ -47,11 +47,11 @@ def yiban():
 	user.yb_id = userdata['id']
 	user.school_id = a.json()['info']['yb_schoolid']
 	db.session.add(user)
-	db.session.commit()
 	if db.session.query(User).filter_by(yb_id = userdata['id']).first().stu_num != None:
 		userdata['is_bind'] = True
 	else:
 		userdata['is_bind'] = False
+		db.session.commit()
 	if db.session.query(School).filter_by(school_id = a.json()['info']['yb_schoolid']).first() != None:
 		if db.session.query(School).filter_by(school_id = a.json()['info']['yb_schoolid']).first().api_url !=None:
 			userdata['school_api'] = True
