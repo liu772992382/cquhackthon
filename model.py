@@ -15,6 +15,7 @@ db = SQLAlchemy(app)
 class School(db.Model):
     __tablename__ = 'schools'
 
+    id = db.Column(db.Integer,primary_key = True)
     school_id = db.Column(db.String(256))
     school_name = db.Column(db.String(256))
     api_url = db.Column(db.String(512))
@@ -29,5 +30,5 @@ class User(db.Model):
     yb_id = db.Column(db.String(64))
     stu_num = db.Column(db.String(64))
     pass_word = db.Column(db.String(128))
-    school_id = db.Column(db.String(256),db.ForeignKey(School.school_id))
+    school_id = db.Column(db.String(256))
     date_time = db.Column(db.DateTime)
