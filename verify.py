@@ -82,6 +82,11 @@ def getdata():
 	get_args = request.args
 	if get_args['token'] == hashpw(get_args['id']+'hackthon'):
 		user = db.session.query(User).filter_by(yb_id = get_args['id']).first()
+		school = db.sesion.query(School).filter_by(school_id = user.school_id).first()
+		a = requests.get('http://'+school.api_url+'?name='+user.stu_num+'&pass='+user.pass_word)
+		return a.text
+	else:
+		return 'error'
 
 
 @app.route('/',methods = ['GET'])
