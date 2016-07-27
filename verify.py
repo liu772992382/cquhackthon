@@ -110,10 +110,9 @@ def submit():
 		dataform = request.form
 		school = db.session.query(School).filter_by(school_name = dataform['school_name']).first()
 		if school == None or school.api_url == None:
-			school_data = School()
-			school_data.api_url = dataform['api_url']
-			school_data.school_name = dataform['school_name']
-			school_data.provide_user_name = dataform['provide_user_name']
+			school.api_url = dataform['api_url']
+			school.school_name = dataform['school_name']
+			school.provide_user_name = dataform['provide_user_name']
 			db.session.commit()
 			return 'success'
 		else:
